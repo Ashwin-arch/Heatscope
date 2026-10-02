@@ -6,10 +6,12 @@ import geopandas as gpd
 import pandas as pd
 import streamlit as st
 
-try:
-    from google_map import render_google_heat_map
-except ModuleNotFoundError:
-    from google_map import render_google_heat_map
+import sys
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from heatscope.google_map import render_google_heat_map
 
 
 # ============================================================
