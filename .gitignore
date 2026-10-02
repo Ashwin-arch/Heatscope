@@ -1,0 +1,42 @@
+__pycache__/
+*.py[cod]
+
+.venv/
+venv/
+env/
+
+.env
+.env.*
+!.env.example
+
+data/raw/
+data/processed/
+
+results/
+models/
+figures/
+
+*.tif
+*.tiff
+*.gpkg
+*.parquet
+*.pkl
+*.joblib
+*.h5
+*.hdf5
+*.pt
+*.pth
+
+.DS_Store
+.vscode/
+.idea/
+
+# Local AI/agent configuration
+.agents/
+.claude/
+
+# Local cache
+cache/
+
+# Local project archive
+HeatScope_code.zip
