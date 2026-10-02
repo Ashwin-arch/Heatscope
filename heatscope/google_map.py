@@ -10,33 +10,46 @@ import streamlit.components.v1 as components
 
 def load_google_maps_key() -> str:
     """
-    Load Google Maps API key from .env.local.
+    Load Google Maps API key.
 
-    Expected:
-        GOOGLE_MAPS_API_KEY=...
-    or:
-        export GOOGLE_MAPS_API_KEY=...
+    Priority:
+    1. Streamlit Secrets (deployed app)
+    2. .env.local (local development)
+    3. Environment variable
     """
 
+    # Streamlit Cloud / Streamlit Secrets
+    try:
+        import streamlit as st
+
+        key = st.secrets.get("GOOGLE_MAPS_API_KEY", "")
+
+        if key:
+            return str(key).strip()
+    except Exception:
+        pass
+
+    # Local .env.local
     p = Path(__file__).resolve().parents[1] / ".env.local"
 
-    if not p.exists():
-        return ""
+    if p.exists():
+        for line in p.read_text().splitlines():
+            line = line.strip()
 
-    for line in p.read_text().splitlines():
-        line = line.strip()
+            if not line or line.startswith("#"):
+                continue
 
-        if not line or line.startswith("#"):
-            continue
+            if line.startswith("export "):
+                line = line[7:].strip()
 
-        if line.startswith("export "):
-            line = line[7:].strip()
+            if line.startswith("GOOGLE_MAPS_API_KEY="):
+                value = line.split("=", 1)[1].strip()
+                return value.strip("\"'")
 
-        if line.startswith("GOOGLE_MAPS_API_KEY="):
-            value = line.split("=", 1)[1].strip()
-            return value.strip("\"'")
+    # Environment variable fallback
+    import os
 
-    return ""
+    return os.getenv("GOOGLE_MAPS_API_KEY", "").strip()
 
 
 def _color(value, vmin, vmax):
