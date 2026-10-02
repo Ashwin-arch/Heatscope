@@ -29,11 +29,11 @@ st.set_page_config(
 
 
 ROOT = Path(__file__).resolve().parents[1]
-RESULTS = ROOT / "results"
+DEMO_DATA = ROOT / "demo_data"
 
-GRID_PATH = RESULTS / "heatscope_master_v2.gpkg"
-MASTER_PATH = RESULTS / "heatscope_master_v2.csv"
-OPERATIONAL_PATH = RESULTS / "heatscope_operational_priority.csv"
+GRID_PATH = DEMO_DATA / "heatscope_master_v2.gpkg"
+MASTER_PATH = DEMO_DATA / "heatscope_master_v2.csv"
+OPERATIONAL_PATH = DEMO_DATA / "heatscope_operational_priority.csv"
 
 
 # ============================================================
