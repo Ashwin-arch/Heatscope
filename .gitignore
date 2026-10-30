@@ -12,9 +12,9 @@ env/
 data/raw/
 data/processed/
 
-results/
-models/
-figures/
+/results/
+/models/
+/figures/
 
 *.tif
 *.tiff
@@ -34,6 +34,7 @@ figures/
 # Local AI/agent configuration
 .agents/
 .claude/
+*-session.json
 
 # Local cache
 cache/
